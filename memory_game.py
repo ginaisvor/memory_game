@@ -4,7 +4,6 @@ import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import random
 turns = 0
 
-# helper function to initialize globals
 def new_game():
     global deck, exposed, turns, flips, flip1, flip2
     flips = 0
@@ -15,22 +14,19 @@ def new_game():
     random.shuffle(deck)
     exposed = [False for num in deck]
           
-# define event handlers
+
 def mouseclick(pos):
-    # add game state logic here
     global exposed, turns, flips, flip1, flip2
     if not exposed[pos[0]//50]:
         if flips == None or flips == 0:
             exposed[pos[0]//50] = True
             flip1 = pos[0] // 50
             flips = 1
-#            print flip1, flip2, "flips: ", flips
         elif flips == 1: 
             exposed[pos[0]//50] = True
             flip2 = pos[0] // 50
             flips = 2
             turns += 1
-#            print flip1, flip2, "flips: ", flips
         else:
             if deck[flip1] != deck[flip2]:
                 exposed[flip1] = False
@@ -39,7 +35,6 @@ def mouseclick(pos):
             flips = 1
             flip1 = pos[0] // 50
             flip2 = None
-#            print flip1, flip2, "flips: ", flips
     return turns
                            
 # cards are logically 50x100 pixels in size    
@@ -68,5 +63,3 @@ frame.set_draw_handler(draw)
 new_game()
 frame.start()
 
-
-# Always remember to review the grading rubric
